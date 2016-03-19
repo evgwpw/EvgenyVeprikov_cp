@@ -447,7 +447,7 @@ function ul(act?: (t: HTMLUListElement) => any, ...content: ElementCreator[]): H
     return Tmp<HTMLUListElement>('ul', act, ...content);
 }
 function xMsWebview(act?: (t: MSHTMLWebViewElement) => any, ...content: ElementCreator[]): MSHTMLWebViewElement {
-    return Tmp<MSHTMLWebViewElement>('x-ms-webview', act, ...content);
+    return Tmp<MSHTMLWebViewElement>('x-ms-webview', act, ...content); 
 }
 /**
  * конфликт с ключевым словом var
