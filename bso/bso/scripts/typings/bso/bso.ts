@@ -447,7 +447,7 @@ function ul(act?: (t: HTMLUListElement) => any, ...content: ElementCreator[]): H
     return Tmp<HTMLUListElement>('ul', act, ...content);
 }
 function xMsWebview(act?: (t: MSHTMLWebViewElement) => any, ...content: ElementCreator[]): MSHTMLWebViewElement {
-    return Tmp<MSHTMLWebViewElement>('x-ms-webview', act, ...content); 
+    return Tmp<MSHTMLWebViewElement>('x-ms-webview', act, ...content);
 }
 /**
  * конфликт с ключевым словом var
@@ -459,6 +459,206 @@ function Var(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]):
 }
 //}
 module Color {
-    export const red = 'red';
-    export const blue = 'blue';
+    export const IndianRed = "IndianRed";
+    export const LightCoral = "LightCoral";
+    export const Salmon = "Salmon";
+    export const DarkSalmon = "DarkSalmon";
+    export const LightSalmon = "LightSalmon";
+    export const Crimson = "Crimson";
+    export const Red = "Red";
+    export const FireBrick = "FireBrick";
+    export const DarkRed = "DarkRed";
+    export const Pink = "Pink";
+    export const LightPink = "LightPink";
+    export const HotPink = "HotPink";
+    export const DeepPink = "DeepPink";
+    export const MediumVioletRed = "MediumVioletRed";
+    export const PaleVioletRed = "PaleVioletRed";
+    export const Coral = "Coral";
+    export const Tomato = "Tomato";
+    export const OrangeRed = "OrangeRed";
+    export const DarkOrange = "DarkOrange";
+    export const Orange = "Orange";
+    export const Gold = "Gold";
+    export const Yellow = "Yellow";
+    export const LightYellow = "LightYellow";
+    export const LemonChiffon = "LemonChiffon";
+    export const LightGoldenrodYellow = "LightGoldenrodYellow";
+    export const PapayaWhip = "PapayaWhip";
+    export const Moccasin = "Moccasin";
+    export const PeachPuff = "PeachPuff";
+    export const PaleGoldenrod = "PaleGoldenrod";
+    export const Khaki = "Khaki";
+    export const DarkKhaki = "DarkKhaki";
+    export const Lavender = "Lavender";
+    export const Thistle = "Thistle";
+    export const Plum = "Plum";
+    export const Violet = "Violet";
+    export const Orchid = "Orchid";
+    export const Fuchsia = "Fuchsia";
+    export const Magenta = "Magenta";
+    export const MediumOrchid = "MediumOrchid";
+    export const MediumPurple = "MediumPurple";
+    export const Amethyst = "MediumPurple";
+    export const BlueViolet = "BlueViolet";
+    export const DarkViolet = "DarkViolet";
+    export const DarkOrchid = "DarkOrchid";
+    export const DarkMagenta = "DarkMagenta";
+    export const Purple = "Purple";
+    export const Indigo = "Indigo";
+    export const SlateBlue = "SlateBlue";
+    export const DarkSlateBlue = "DarkSlateBlue";
+    export const MediumSlateBlue = "MediumSlateBlue";
+    export const GreenYellow = "GreenYellow";
+    export const Chartreuse = "Chartreuse";
+    export const LawnGreen = "LawnGreen";
+    export const Lime = "Lime";
+    export const LimeGreen = "LimeGreen";
+    export const PaleGreen = "PaleGreen";
+    export const LightGreen = "LightGreen";
+    export const MediumSpringGreen = "MediumSpringGreen";
+    export const SpringGreen = "SpringGreen";
+    export const MediumSeaGreen = "MediumSeaGreen";
+    export const SeaGreen = "SeaGreen";
+    export const ForestGreen = "ForestGreen";
+    export const Green = "Green";
+    export const DarkGreen = "DarkGreen";
+    export const YellowGreen = "YellowGreen";
+    export const OliveDrab = "OliveDrab";
+    export const Olive = "Olive";
+    export const DarkOliveGreen = "DarkOliveGreen";
+    export const MediumAquamarine = "MediumAquamarine";
+    export const DarkSeaGreen = "DarkSeaGreen";
+    export const LightSeaGreen = "LightSeaGreen";
+    export const DarkCyan = "DarkCyan";
+    export const Teal = "Teal";
+    export const Aqua = "Aqua";
+    export const Cyan = "Cyan";
+    export const LightCyan = "LightCyan";
+    export const PaleTurquoise = "PaleTurquoise";
+    export const Aquamarine = "Aquamarine";
+    export const Turquoise = "Turquoise";
+    export const MediumTurquoise = "MediumTurquoise";
+    export const DarkTurquoise = "DarkTurquoise";
+    export const CadetBlue = "CadetBlue";
+    export const SteelBlue = "SteelBlue";
+    export const LightSteelBlue = "LightSteelBlue";
+    export const PowderBlue = "PowderBlue";
+    export const LightBlue = "LightBlue";
+    export const SkyBlue = "SkyBlue";
+    export const LightSkyBlue = "LightSkyBlue";
+    export const DeepSkyBlue = "DeepSkyBlue";
+    export const DodgerBlue = "DodgerBlue";
+    export const CornflowerBlue = "CornflowerBlue";
+    export const RoyalBlue = "RoyalBlue";
+    export const Blue = "Blue";
+    export const MediumBlue = "MediumBlue";
+    export const DarkBlue = "DarkBlue";
+    export const Navy = "Navy";
+    export const MidnightBlue = "MidnightBlue";
+    export const Cornsilk = "Cornsilk";
+    export const BlanchedAlmond = "BlanchedAlmond";
+    export const Bisque = "Bisque";
+    export const NavajoWhite = "NavajoWhite";
+    export const Wheat = "Wheat";
+    export const BurlyWood = "BurlyWood";
+    export const Tan = "Tan";
+    export const RosyBrown = "RosyBrown";
+    export const SandyBrown = "SandyBrown";
+    export const Goldenrod = "Goldenrod";
+    export const DarkGoldenrod = "DarkGoldenrod";
+    export const Peru = "Peru";
+    export const Chocolate = "Chocolate";
+    export const SaddleBrown = "SaddleBrown";
+    export const Sienna = "Sienna";
+    export const Brown = "Brown";
+    export const Maroon = "Maroon";
+    export const White = "White";
+    export const Snow = "Snow";
+    export const Honeydew = "Honeydew";
+    export const MintCream = "MintCream";
+    export const Azure = "Azure";
+    export const AliceBlue = "AliceBlue";
+    export const GhostWhite = "GhostWhite";
+    export const WhiteSmoke = "WhiteSmoke";
+    export const Seashell = "Seashell";
+    export const Beige = "Beige";
+    export const OldLace = "OldLace";
+    export const FloralWhite = "FloralWhite";
+    export const Ivory = "Ivory";
+    export const AntiqueWhite = "AntiqueWhite";
+    export const Linen = "Linen";
+    export const LavenderBlush = "LavenderBlush";
+    export const MistyRose = "MistyRose";
+    export const Gainsboro = "Gainsboro";
+    export const LightGrey = "LightGrey";
+    export const Silver = "Silver";
+    export const DarkGray = "DarkGray";
+    export const Gray = "Gray";
+    export const DimGray = "DimGray";
+    export const LightSlateGray = "LightSlateGray";
+    export const SlateGray = "SlateGray";
+    export const DarkSlateGray = "DarkSlateGray";
+    export const Black = "Black";
+}
+module Display {
+    export const block = "block";
+    export const inline = "inline";
+    export const inline_block = "inline-block";
+    export const inline_table = "inline-table";
+    export const list_item = "list-item";
+    export const none = "none";
+    export const run_in = "run-in";
+    export const table = "";
+    export const table_caption = "table";
+    export const table_cell = "table-caption";
+    export const table_column = "table-column";
+    export const table_column_group = "table-column-group";
+    export const table_footer_group = "table-footer-group";
+    export const table_header_group = "table-header-group";
+    export const table_row = "table-row";
+    export const table_row_group = "table-row-group";
+}
+module Visibility {
+    export const visible = "visible";
+    export const hidden = "hidden";
+    export const collapse = "collapse";
+    export const inherit = "inherit";
+}
+module WordBreak {
+    export const normal = "normal";
+    export const break_all = "break-all";
+    export const keep_all = "keep-all";
+}
+module Align {
+    export const bottom = "bottom";
+    export const left = "left";
+    export const middle = "middle";
+    export const right = "right";
+    export const top = "top";
+}
+module VerticalAlign {
+    export const baseline = "baseline";
+    export const bottom = "bottom";
+    export const middle = "middle";
+    export const sub = "sub";
+    export const Super = "super";
+    export const text_bottom = "text-bottom";
+    export const text_top = "text-top";
+    export const top = "top";
+    export const inherit = "inherit";
+
+}
+module WordWrap {
+    export const normal = "normal";
+    export const break_word = "break-word";
+    export const inherit = "inherit";
+}
+module Overflow
+{
+    export const auto = "auto";
+    export const hidden = "hidden";
+    export const scroll = "scroll";
+    export const visible = "visible";
+    export const inherit = "inherit";
 }
