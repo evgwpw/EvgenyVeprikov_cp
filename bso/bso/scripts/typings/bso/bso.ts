@@ -27,7 +27,7 @@ function Tmp<T extends HTMLElement>(tag: string, act?: (t: T) => any, ...content
     }
     return el;
 }
-function article(act?: (t: HTMLArticleElement) => any, ...content: ElementCreator[]): HTMLArticleElement {
+function article(act?: (t: HTMLArticleElement) => any, ...content: ElementCreator[]): HTMLArticleElement {  
     return Tmp<HTMLArticleElement>('article', act, ...content);
 }
 function header(act?: (t: HTMLHeaderElement) => any, ...content: ElementCreator[]): HTMLHeaderElement {
