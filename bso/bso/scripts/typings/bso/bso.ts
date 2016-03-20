@@ -4,6 +4,10 @@
 declare type Creator = () => HTMLElement;
 declare type ElementArray = Array<HTMLElement>;
 declare type ElementCreator = Creator | ElementArray;
+interface HTMLArticleElement extends HTMLElement{ }
+interface HTMLHeaderElement extends HTMLElement { }
+interface HTMLFooterElement extends HTMLElement { }
+interface HTMLSectionElement extends HTMLElement { }
 function Tmp<T extends HTMLElement>(tag: string, act?: (t: T) => any, ...content: ElementCreator[]): T {
     var el = document.createElement(tag) as T;
     if (act)
@@ -22,6 +26,18 @@ function Tmp<T extends HTMLElement>(tag: string, act?: (t: T) => any, ...content
         }
     }
     return el;
+}
+function article(act?: (t: HTMLArticleElement) => any, ...content: ElementCreator[]): HTMLArticleElement {
+    return Tmp<HTMLArticleElement>('article', act, ...content);
+}
+function header(act?: (t: HTMLHeaderElement) => any, ...content: ElementCreator[]): HTMLHeaderElement {
+    return Tmp<HTMLHeaderElement>('header', act, ...content);
+}
+function footer(act?: (t: HTMLFooterElement) => any, ...content: ElementCreator[]): HTMLFooterElement {
+    return Tmp<HTMLFooterElement>('footer', act, ...content);
+}
+function section(act?: (t: HTMLSectionElement) => any, ...content: ElementCreator[]): HTMLSectionElement {
+    return Tmp<HTMLSectionElement>('section', act, ...content);
 }
 function div(act?: (t: HTMLDivElement) => any, ...content: ElementCreator[]): HTMLDivElement {
     return Tmp<HTMLDivElement>('div', act, ...content);
@@ -660,5 +676,14 @@ module Overflow
     export const hidden = "hidden";
     export const scroll = "scroll";
     export const visible = "visible";
+    export const inherit = "inherit";
+}
+module TextDecoration
+{
+    export const blink = "blink";
+    export const line_through= "line-through";
+    export const overline = "overline";
+    export const underline = "underline";
+    export const none = "none";
     export const inherit = "inherit";
 }

@@ -23,6 +23,34 @@ function Tmp(tag, act) {
     }
     return el;
 }
+function article(act) {
+    var content = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        content[_i - 1] = arguments[_i];
+    }
+    return Tmp.apply(void 0, ['article', act].concat(content));
+}
+function header(act) {
+    var content = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        content[_i - 1] = arguments[_i];
+    }
+    return Tmp.apply(void 0, ['header', act].concat(content));
+}
+function footer(act) {
+    var content = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        content[_i - 1] = arguments[_i];
+    }
+    return Tmp.apply(void 0, ['footer', act].concat(content));
+}
+function section(act) {
+    var content = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        content[_i - 1] = arguments[_i];
+    }
+    return Tmp.apply(void 0, ['section', act].concat(content));
+}
 function div(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -1181,4 +1209,13 @@ var Overflow;
     Overflow.visible = "visible";
     Overflow.inherit = "inherit";
 })(Overflow || (Overflow = {}));
+var TextDecoration;
+(function (TextDecoration) {
+    TextDecoration.blink = "blink";
+    TextDecoration.line_through = "line-through";
+    TextDecoration.overline = "overline";
+    TextDecoration.underline = "underline";
+    TextDecoration.none = "none";
+    TextDecoration.inherit = "inherit";
+})(TextDecoration || (TextDecoration = {}));
 //# sourceMappingURL=bso.js.map
