@@ -33,6 +33,7 @@ function GetItem(str) {
         x.textContent = str;
         lb = x;
     }); }); }, function () { return inputText(function (x) {
+        x.hidden = true;
     }); });
     return res;
 }
