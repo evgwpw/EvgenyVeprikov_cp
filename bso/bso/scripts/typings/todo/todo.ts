@@ -64,7 +64,7 @@ function GetItem(str: string): HTMLLIElement
         ),
         () => inputText(x=>
         {
-            x.hidden = true;
+            x.hidden = true; 
         })
     );
 
