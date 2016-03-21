@@ -40,7 +40,6 @@ function GetProxy<T>(t: T, usePrototype?: boolean): T
         }
     };
     var inner = res["__BsoInnerObject"] as T;
-  //  res["__BsoInnerObject"] = t;
     var props = usePrototype ? Object.getOwnPropertyNames(Object.getPrototypeOf(t)) : Object.getOwnPropertyNames(t);
     for (var i in props)
     {
@@ -83,6 +82,14 @@ function Tmp<T extends HTMLElement>(tag: string, act?: (t: T) => any, ...content
         }
     }
     return el;
+}
+var BsoRe = /\.([\w_]+);/;
+function GetPropertyName(fun: Function): string {
+    var str = fun + '';
+    var tmp = BsoRe.exec(str);
+    if (tmp && tmp.length >= 2) 
+        return tmp[1];
+    return '';
 }
 class Binding<M>
 {

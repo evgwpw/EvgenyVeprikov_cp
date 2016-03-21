@@ -21,7 +21,6 @@ function GetProxy(t, usePrototype) {
         }
     };
     var inner = res["__BsoInnerObject"];
-    //  res["__BsoInnerObject"] = t;
     var props = usePrototype ? Object.getOwnPropertyNames(Object.getPrototypeOf(t)) : Object.getOwnPropertyNames(t);
     for (var i in props) {
         var tmp = props[i];
@@ -63,6 +62,14 @@ function Tmp(tag, act) {
         }
     }
     return el;
+}
+var BsoRe = /\.([\w_]+);/;
+function GetPropertyName(fun) {
+    var str = fun + '';
+    var tmp = BsoRe.exec(str);
+    if (tmp && tmp.length >= 2)
+        return tmp[1];
+    return '';
 }
 var Binding = (function () {
     function Binding(m) {
