@@ -1,5 +1,27 @@
 /// <reference path="../jquery/jquery.d.ts" />
 //module BSO {
+function GetProxy(t, usePrototype) {
+    var res = {};
+    Object.defineProperty(res, 'BsoInnerObject', {
+        get: function () { return res["__BsoInnerObject"]; },
+        set: function (value) { return res["__BsoInnerObject"] = value; },
+        value: t
+    });
+    res['BsoOnChanged'] = function (name, oldValue, newValue) {
+    };
+    var inner = res["__BsoInnerObject"];
+    //  res["__BsoInnerObject"] = t;
+    var props = usePrototype ? Object.getOwnPropertyNames(Object.getPrototypeOf(t)) : Object.getOwnPropertyNames(t);
+    for (var i in props) {
+        var tmp = props[i];
+        Object.defineProperty(res, tmp, {
+            configurable: true,
+            enumerable: true,
+            writable: true,
+        });
+    }
+    return res;
+}
 function Tmp(tag, act) {
     var content = [];
     for (var _i = 2; _i < arguments.length; _i++) {

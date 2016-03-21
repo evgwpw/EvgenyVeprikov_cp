@@ -8,6 +8,41 @@ interface HTMLArticleElement extends HTMLElement{ }
 interface HTMLHeaderElement extends HTMLElement { }
 interface HTMLFooterElement extends HTMLElement { }
 interface HTMLSectionElement extends HTMLElement { }
+
+interface BsoPropertyChanged
+{
+    BsoOnChanged: (name: string, oldValue: any, newValue: any) => void;
+}
+function GetProxy<T>(t: T, usePrototype?: boolean): T 
+{
+    var res = {};
+    Object.defineProperty(res, 'BsoInnerObject',
+        {
+            get: () => res["__BsoInnerObject"],
+            set: value=> res["__BsoInnerObject"] = value,
+            value: t
+        });
+    res['BsoOnChanged'] = function (name: string, oldValue: any, newValue: any): void
+    {
+
+    };
+    var inner = res["__BsoInnerObject"] as T;
+  //  res["__BsoInnerObject"] = t;
+    var props = usePrototype ? Object.getOwnPropertyNames(Object.getPrototypeOf(t)) : Object.getOwnPropertyNames(t);
+    for (var i in props)
+    {
+        var tmp = props[i];
+        Object.defineProperty(res, tmp,
+            {
+                configurable: true,
+                enumerable: true,
+                writable: true,
+                
+            });
+    }
+    
+    return res as T;
+}
 function Tmp<T extends HTMLElement>(tag: string, act?: (t: T) => any, ...content: ElementCreator[]): T {
     var el = document.createElement(tag) as T;
     if (act)
