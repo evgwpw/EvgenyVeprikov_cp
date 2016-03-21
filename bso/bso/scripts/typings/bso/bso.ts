@@ -8,10 +8,11 @@ interface HTMLArticleElement extends HTMLElement{ }
 interface HTMLHeaderElement extends HTMLElement { }
 interface HTMLFooterElement extends HTMLElement { }
 interface HTMLSectionElement extends HTMLElement { }
-
-interface BsoPropertyChanged
+declare type BsoOnChangedType = (name: string, oldValue: any, newValue: any) => void;
+declare type BsoInputElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+interface BsoPropertyChanged 
 {
-    BsoOnChanged: (name: string, oldValue: any, newValue: any) => void;
+    BsoOnChanged: BsoOnChangedType;
 }
 function GetProxy<T>(t: T, usePrototype?: boolean): T 
 {
@@ -19,12 +20,24 @@ function GetProxy<T>(t: T, usePrototype?: boolean): T
     Object.defineProperty(res, 'BsoInnerObject',
         {
             get: () => res["__BsoInnerObject"],
-            set: value=> res["__BsoInnerObject"] = value,
+            set: value=> { res["__BsoInnerObject"] = value; },
             value: t
         });
-    res['BsoOnChanged'] = function (name: string, oldValue: any, newValue: any): void
+    Object.defineProperty(res, 'BsoOnChanged',
+        {
+            configurable: true,
+            enumerable: true,
+            writable: true,
+            get: () => { return res['__BsoOnChanged']; },
+            set: (v) => { res['__BsoOnChanged'] = v; }
+        });
+    var BsoOnChanged  = function (name: string, oldValue: any, newValue: any): void
     {
-
+        var tmp = res['BsoOnChanged'] as BsoOnChangedType;
+        if (tmp)
+        {
+            tmp(name, oldValue, newValue);
+        }
     };
     var inner = res["__BsoInnerObject"] as T;
   //  res["__BsoInnerObject"] = t;
@@ -37,7 +50,16 @@ function GetProxy<T>(t: T, usePrototype?: boolean): T
                 configurable: true,
                 enumerable: true,
                 writable: true,
-                
+                get: () =>
+                {
+                    return inner[tmp];
+                },
+                set: (v: any) =>
+                {
+                    var old = inner[tmp];
+                    inner[tmp] = v;
+                    BsoOnChanged(tmp, old, v);
+                }
             });
     }
     
@@ -61,6 +83,21 @@ function Tmp<T extends HTMLElement>(tag: string, act?: (t: T) => any, ...content
         }
     }
     return el;
+}
+class Binding<M>
+{
+    private model: M;
+    public constructor(m: M)
+    {
+        this.model = m;
+    }
+    public Bind(e: BsoInputElement, getProp: (m1: M) => any, setProp: (e1: BsoInputElement) => any): Binding<M>
+    {
+
+
+        return this;
+    }
+
 }
 function article(act?: (t: HTMLArticleElement) => any, ...content: ElementCreator[]): HTMLArticleElement {  
     return Tmp<HTMLArticleElement>('article', act, ...content);

@@ -4,10 +4,21 @@ function GetProxy(t, usePrototype) {
     var res = {};
     Object.defineProperty(res, 'BsoInnerObject', {
         get: function () { return res["__BsoInnerObject"]; },
-        set: function (value) { return res["__BsoInnerObject"] = value; },
+        set: function (value) { res["__BsoInnerObject"] = value; },
         value: t
     });
-    res['BsoOnChanged'] = function (name, oldValue, newValue) {
+    Object.defineProperty(res, 'BsoOnChanged', {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        get: function () { return res['__BsoOnChanged']; },
+        set: function (v) { res['__BsoOnChanged'] = v; }
+    });
+    var BsoOnChanged = function (name, oldValue, newValue) {
+        var tmp = res['BsoOnChanged'];
+        if (tmp) {
+            tmp(name, oldValue, newValue);
+        }
     };
     var inner = res["__BsoInnerObject"];
     //  res["__BsoInnerObject"] = t;
@@ -18,6 +29,14 @@ function GetProxy(t, usePrototype) {
             configurable: true,
             enumerable: true,
             writable: true,
+            get: function () {
+                return inner[tmp];
+            },
+            set: function (v) {
+                var old = inner[tmp];
+                inner[tmp] = v;
+                BsoOnChanged(tmp, old, v);
+            }
         });
     }
     return res;
@@ -45,6 +64,15 @@ function Tmp(tag, act) {
     }
     return el;
 }
+var Binding = (function () {
+    function Binding(m) {
+        this.model = m;
+    }
+    Binding.prototype.Bind = function (e, getProp, setProp) {
+        return this;
+    };
+    return Binding;
+})();
 function article(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
