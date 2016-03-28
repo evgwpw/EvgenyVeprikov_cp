@@ -7,7 +7,8 @@
  * :=>DD
  * -=>_
  */
-module bootstrapCss {  
+module bootstrapCss
+{  
 
     /**
      * active
@@ -5588,7 +5589,7 @@ module bootstrapCss {
      * well-sm
      */
     export const well_sm = "well-sm";
-
+     
     /**
      * woff
      */
@@ -5597,7 +5598,7 @@ module bootstrapCss {
     /**
      * woff2
      */
-    export const woff2 = "woff2";
+    export const woff2 = "woff2"; 
 
 
 }

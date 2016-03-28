@@ -1,4 +1,4 @@
-/**
+﻿/**
  * классы css для bootstrap
  * имеем следующие замены
  * [=>$
@@ -12,7 +12,7 @@ var bootstrapCss;
     /**
      * active
      */
-    bootstrapCss.active = "active";
+    bootstrapCss.active = "active"; 
     /**
      * active.left
      */
