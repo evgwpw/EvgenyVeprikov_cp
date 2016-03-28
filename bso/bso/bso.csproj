@@ -106,8 +106,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\jquery-2.2.1.min.map" />
+    <Content Include="scripts\typings\bso\bootstrapCss.js" />
     <Content Include="scripts\typings\bso\bso.js.map" />
     <Content Include="scripts\typings\todo\todo.js.map" />
+    <Content Include="scripts\typings\bso\bootstrapCss.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -128,6 +130,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="scripts\typings\bso\bootstrapCss.ts" />
     <TypeScriptCompile Include="scripts\typings\bso\bso.ts" />
     <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="scripts\typings\todo\todo.ts" />

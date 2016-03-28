@@ -91,6 +91,28 @@ function GetPropertyName(fun: Function): string {
         return tmp[1];
     return '';
 }
+/**
+ * соеденяем классы в строку разделенную пробелами
+ * @param {type} ...list
+ * @returns
+ */
+function CombineCss(...list: string[]): string
+{
+    var res: string = "";
+    for (var i = 0; i < list.length - 2; i++)
+    {
+        res += list[i] + " ";
+    }
+    res += list[list.length - 1];
+    return res;
+}
+function CombineCssInner(el: HTMLElement, ...list: string[]): void
+{
+    for (var s in list)
+    {
+        el.classList.add(list[s]);
+    }
+}
 class Binding<M>
 {
     private model: M;
@@ -693,7 +715,7 @@ module Color {
     export const DimGray = "DimGray";
     export const LightSlateGray = "LightSlateGray";
     export const SlateGray = "SlateGray";
-    export const DarkSlateGray = "DarkSlateGray";
+    export const DarkSlateGray = "DarkSlateGray";  
     export const Black = "Black";
 }
 module Display {

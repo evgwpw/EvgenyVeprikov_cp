@@ -71,6 +71,32 @@ function GetPropertyName(fun) {
         return tmp[1];
     return '';
 }
+/**
+ * соеденяем классы в строку разделенную пробелами
+ * @param {type} ...list
+ * @returns
+ */
+function CombineCss() {
+    var list = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        list[_i - 0] = arguments[_i];
+    }
+    var res = "";
+    for (var i = 0; i < list.length - 2; i++) {
+        res += list[i] + " ";
+    }
+    res += list[list.length - 1];
+    return res;
+}
+function CombineCssInner(el) {
+    var list = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        list[_i - 1] = arguments[_i];
+    }
+    for (var s in list) {
+        el.classList.add(list[s]);
+    }
+}
 var Binding = (function () {
     function Binding(m) {
         this.model = m;
