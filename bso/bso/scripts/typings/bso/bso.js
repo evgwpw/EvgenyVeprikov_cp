@@ -1,5 +1,17 @@
 /// <reference path="../jquery/jquery.d.ts" />
 //module BSO {
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var BsoError = (function (_super) {
+    __extends(BsoError, _super);
+    function BsoError(message) {
+        _super.call(this, message);
+    }
+    return BsoError;
+})(Error);
 function GetProxy(t, usePrototype) {
     var res = {};
     Object.defineProperty(res, 'BsoInnerObject', {
@@ -64,6 +76,11 @@ function Tmp(tag, act) {
     return el;
 }
 var BsoRe = /\.([\w_]+);/;
+/**
+ * рефлексии нет, но фик с ней, из функции вида x=>x.PropertyNeme получаем имя свойства и используем в своих корыстных целях
+ * @param {type} fun
+ * @returns
+ */
 function GetPropertyName(fun) {
     var str = fun + '';
     var tmp = BsoRe.exec(str);
@@ -97,14 +114,46 @@ function CombineCssInner(el) {
         el.classList.add(list[s]);
     }
 }
-var Binding = (function () {
-    function Binding(m) {
-        this.model = m;
+var Binder = (function () {
+    function Binder(srcData) {
+        this.srcData = srcData;
+        this.innerObj = {};
     }
-    Binding.prototype.Bind = function (e, getProp, setProp) {
-        return this;
+    Object.defineProperty(Binder.prototype, "Data", {
+        get: function () {
+            return this.innerObj;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * привязываем свойство UI к свойству объекта, обе фунции должны возвращать одно из свойств объекта
+     * @param {type} elProp
+     * @param {type} objProp
+     */
+    Binder.prototype.ApplyProperty = function (el, elProp, objProp) {
+        var sEl = GetPropertyName(elProp);
+        var sOb = GetPropertyName(objProp);
+        if (this.ExistsProperty(sOb)) {
+            throw new BsoError('Свойство ' + sOb + 'уже существует');
+        }
+        Object.defineProperty(this.innerObj, sOb, {
+            get: function () {
+                return el[sEl];
+            },
+            set: function (v) {
+                el[sEl] = v;
+            }
+        });
     };
-    return Binding;
+    /**
+     * проверяет, есть ли уже в объекте свойство
+     * @param {string} propName
+     */
+    Binder.prototype.ExistsProperty = function (propName) {
+        return this.innerObj.hasOwnProperty(propName);
+    };
+    return Binder;
 })();
 function article(act) {
     var content = [];

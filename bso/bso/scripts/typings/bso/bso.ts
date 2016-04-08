@@ -10,6 +10,12 @@ interface HTMLFooterElement extends HTMLElement { }
 interface HTMLSectionElement extends HTMLElement { }
 declare type BsoOnChangedType = (name: string, oldValue: any, newValue: any) => void;
 declare type BsoInputElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+class BsoError extends Error
+{
+    public constructor(message?: string) {
+        super(message);
+    }
+}
 interface BsoPropertyChanged 
 {
     BsoOnChanged: BsoOnChangedType;
@@ -84,6 +90,11 @@ function Tmp<T extends HTMLElement>(tag: string, act?: (t: T) => any, ...content
     return el;
 }
 var BsoRe = /\.([\w_]+);/;
+/**
+ * рефлексии нет, но фик с ней, из функции вида x=>x.PropertyNeme получаем имя свойства и используем в своих корыстных целях
+ * @param {type} fun
+ * @returns
+ */
 function GetPropertyName(fun: Function): string {
     var str = fun + '';
     var tmp = BsoRe.exec(str);
@@ -113,20 +124,51 @@ function CombineCssInner(el: HTMLElement, ...list: string[]): void
         el.classList.add(list[s]);
     }
 }
-class Binding<M>
+
+abstract class Binder<T>
 {
-    private model: M;
-    public constructor(m: M)
+    private data: T;
+    private innerObj = {};
+    public get Data(): T
     {
-        this.model = m;
-    }
-    public Bind(e: BsoInputElement, getProp: (m1: M) => any, setProp: (e1: BsoInputElement) => any): Binding<M>
-    {
-
-
-        return this;
+        return this.innerObj as T;
     }
 
+    public constructor(private srcData: T)
+    { }
+    /**
+     * привязываем свойство UI к свойству объекта, обе фунции должны возвращать одно из свойств объекта
+     * @param {type} elProp
+     * @param {type} objProp
+     */
+    public ApplyProperty<E extends HTMLElement>(el: HTMLElement, elProp: (e: E) => any, objProp: (t: T) => any): void
+    {
+        var sEl = GetPropertyName(elProp);
+        var sOb = GetPropertyName(objProp);
+        if (this.ExistsProperty(sOb))
+        {
+            throw new BsoError('Свойство ' + sOb + 'уже существует');
+        }
+        Object.defineProperty(this.innerObj, sOb,
+            {
+                get: () =>
+                {
+                    return el[sEl];
+                },
+                set: (v: any) =>
+                {
+                    el[sEl] = v;
+                }
+            });
+    }
+    /**
+     * проверяет, есть ли уже в объекте свойство
+     * @param {string} propName
+     */
+    protected ExistsProperty(propName: string): boolean
+    {
+        return (this.innerObj as Object).hasOwnProperty(propName);
+    }
 }
 function article(act?: (t: HTMLArticleElement) => any, ...content: ElementCreator[]): HTMLArticleElement {  
     return Tmp<HTMLArticleElement>('article', act, ...content);
