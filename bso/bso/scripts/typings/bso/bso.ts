@@ -81,7 +81,7 @@ abstract class Binder<T>
         return this.innerObj as T;
     }
 
-    public constructor(protected srcData: T)
+    public constructor(public srcData: T)
     { }
     /**
      * привязываем свойство UI к свойству объекта, обе фунции должны возвращать одно из свойств объекта
