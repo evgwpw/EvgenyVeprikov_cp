@@ -12,46 +12,6 @@ var BsoError = (function (_super) {
     }
     return BsoError;
 })(Error);
-function GetProxy(t, usePrototype) {
-    var res = {};
-    Object.defineProperty(res, 'BsoInnerObject', {
-        get: function () { return res["__BsoInnerObject"]; },
-        set: function (value) { res["__BsoInnerObject"] = value; },
-        value: t
-    });
-    Object.defineProperty(res, 'BsoOnChanged', {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        get: function () { return res['__BsoOnChanged']; },
-        set: function (v) { res['__BsoOnChanged'] = v; }
-    });
-    var BsoOnChanged = function (name, oldValue, newValue) {
-        var tmp = res['BsoOnChanged'];
-        if (tmp) {
-            tmp(name, oldValue, newValue);
-        }
-    };
-    var inner = res["__BsoInnerObject"];
-    var props = usePrototype ? Object.getOwnPropertyNames(Object.getPrototypeOf(t)) : Object.getOwnPropertyNames(t);
-    for (var i in props) {
-        var tmp = props[i];
-        Object.defineProperty(res, tmp, {
-            configurable: true,
-            enumerable: true,
-            writable: true,
-            get: function () {
-                return inner[tmp];
-            },
-            set: function (v) {
-                var old = inner[tmp];
-                inner[tmp] = v;
-                BsoOnChanged(tmp, old, v);
-            }
-        });
-    }
-    return res;
-}
 function Tmp(tag, act) {
     var content = [];
     for (var _i = 2; _i < arguments.length; _i++) {
@@ -114,10 +74,11 @@ function CombineCssInner(el) {
         el.classList.add(list[s]);
     }
 }
+function EmptyAction(el) { }
 var Binder = (function () {
     function Binder(srcData) {
         this.srcData = srcData;
-        this.innerObj = {};
+        this.innerObj = new Object();
     }
     Object.defineProperty(Binder.prototype, "Data", {
         get: function () {
@@ -131,7 +92,7 @@ var Binder = (function () {
      * @param {type} elProp
      * @param {type} objProp
      */
-    Binder.prototype.ApplyProperty = function (el, elProp, objProp) {
+    Binder.prototype.BS = function (el, elProp, objProp) {
         var sEl = GetPropertyName(elProp);
         var sOb = GetPropertyName(objProp);
         if (this.ExistsProperty(sOb)) {
@@ -143,7 +104,30 @@ var Binder = (function () {
             },
             set: function (v) {
                 el[sEl] = v;
-            }
+            },
+            configurable: true,
+            enumerable: true,
+        });
+        this.innerObj[sOb] = this.srcData[sOb];
+    };
+    /**
+     *
+     * @param {type} el
+     * @param {type} fun
+     * @param {type} t
+     */
+    Binder.prototype.BC = function (el, objProp, Get, Set) {
+        var sOb = GetPropertyName(objProp);
+        if (this.ExistsProperty(sOb)) {
+            throw new BsoError('Свойство ' + sOb + 'уже существует');
+        }
+        Object.defineProperty(this.innerObj, sOb, {
+            get: function () { return Get(el); },
+            set: function (v) {
+                Set(el);
+            },
+            configurable: true,
+            enumerable: true
         });
     };
     /**

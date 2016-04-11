@@ -9,67 +9,13 @@ interface HTMLHeaderElement extends HTMLElement { }
 interface HTMLFooterElement extends HTMLElement { }
 interface HTMLSectionElement extends HTMLElement { }
 declare type BsoOnChangedType = (name: string, oldValue: any, newValue: any) => void;
-declare type BsoInputElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 class BsoError extends Error
 {
     public constructor(message?: string) {
         super(message);
     }
 }
-interface BsoPropertyChanged 
-{
-    BsoOnChanged: BsoOnChangedType;
-}
-function GetProxy<T>(t: T, usePrototype?: boolean): T 
-{
-    var res = {};
-    Object.defineProperty(res, 'BsoInnerObject',
-        {
-            get: () => res["__BsoInnerObject"],
-            set: value=> { res["__BsoInnerObject"] = value; },
-            value: t
-        });
-    Object.defineProperty(res, 'BsoOnChanged',
-        {
-            configurable: true,
-            enumerable: true,
-            writable: true,
-            get: () => { return res['__BsoOnChanged']; },
-            set: (v) => { res['__BsoOnChanged'] = v; }
-        });
-    var BsoOnChanged  = function (name: string, oldValue: any, newValue: any): void
-    {
-        var tmp = res['BsoOnChanged'] as BsoOnChangedType;
-        if (tmp)
-        {
-            tmp(name, oldValue, newValue);
-        }
-    };
-    var inner = res["__BsoInnerObject"] as T;
-    var props = usePrototype ? Object.getOwnPropertyNames(Object.getPrototypeOf(t)) : Object.getOwnPropertyNames(t);
-    for (var i in props)
-    {
-        var tmp = props[i];
-        Object.defineProperty(res, tmp,
-            {
-                configurable: true,
-                enumerable: true,
-                writable: true,
-                get: () =>
-                {
-                    return inner[tmp];
-                },
-                set: (v: any) =>
-                {
-                    var old = inner[tmp];
-                    inner[tmp] = v;
-                    BsoOnChanged(tmp, old, v);
-                }
-            });
-    }
-    
-    return res as T;
-}
+
 function Tmp<T extends HTMLElement>(tag: string, act?: (t: T) => any, ...content: ElementCreator[]): T {
     var el = document.createElement(tag) as T;
     if (act)
@@ -124,24 +70,25 @@ function CombineCssInner(el: HTMLElement, ...list: string[]): void
         el.classList.add(list[s]);
     }
 }
-
+function EmptyAction(el: HTMLElement): void
+{ }
 abstract class Binder<T>
 {
     private data: T;
-    private innerObj = {};
+    private innerObj = new Object();
     public get Data(): T
     {
         return this.innerObj as T;
     }
 
-    public constructor(private srcData: T)
+    public constructor(protected srcData: T)
     { }
     /**
      * привязываем свойство UI к свойству объекта, обе фунции должны возвращать одно из свойств объекта
      * @param {type} elProp
      * @param {type} objProp
      */
-    public ApplyProperty<E extends HTMLElement>(el: HTMLElement, elProp: (e: E) => any, objProp: (t: T) => any): void
+    public BS<E>(el: E, elProp: (e: E) => any, objProp: (t: T) => any): void
     {
         var sEl = GetPropertyName(elProp);
         var sOb = GetPropertyName(objProp);
@@ -151,6 +98,7 @@ abstract class Binder<T>
         }
         Object.defineProperty(this.innerObj, sOb,
             {
+                
                 get: () =>
                 {
                     return el[sEl];
@@ -158,7 +106,34 @@ abstract class Binder<T>
                 set: (v: any) =>
                 {
                     el[sEl] = v;
-                }
+                },
+                configurable: true,
+                enumerable: true,
+                
+            });
+        this.innerObj[sOb] = this.srcData[sOb]
+    }
+    /**
+     * 
+     * @param {type} el
+     * @param {type} fun
+     * @param {type} t
+     */
+    public BC<E, K>(el: E, objProp: (t: T) => any, Get: (e: E) => K, Set: (v: any) => void): void
+    {
+        var sOb = GetPropertyName(objProp);
+        if (this.ExistsProperty(sOb)) {
+            throw new BsoError('Свойство ' + sOb + 'уже существует');
+        }
+        Object.defineProperty(this.innerObj, sOb,
+            {
+                get: () => Get(el),
+                set: (v: any) =>
+                {
+                    Set(el);
+                },
+                configurable: true,
+                enumerable: true
             });
     }
     /**
