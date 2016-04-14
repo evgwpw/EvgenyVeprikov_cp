@@ -1,0 +1,110 @@
+/// <reference path="../../jquery/jquery.d.ts" />
+/// <reference path="../../bso/bso.ts" />
+var Tests;
+(function (Tests) {
+    var Pager = (function () {
+        function Pager(itemCount, pageSize, handl) {
+            this.itemCount = itemCount;
+            this.pageSize = pageSize;
+            this.CurrentPage = 1;
+            if (handl)
+                this.PageChange = handl;
+        }
+        Object.defineProperty(Pager.prototype, "FullPageCount", {
+            /**
+             * число страниц в которых заполнены все строки
+             * @returns
+             */
+            get: function () {
+                return this.itemCount / this.pageSize;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Pager.prototype, "RowInLastPage", {
+            /**
+             * строк на последней странице
+             * @returns
+             */
+            get: function () {
+                return this.itemCount % this.pageSize;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Pager.prototype, "PageCount", {
+            /**
+             * всего страниц
+             * @returns
+             */
+            get: function () {
+                return this.FullPageCount + this.RowInLastPage > 0 ? 1 : 0;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Pager.prototype.Pager = function () {
+            return this.CreatePager();
+        };
+        Pager.prototype.CreatePager = function () {
+            return this.GetTab();
+        };
+        Pager.prototype.GetTab = function () {
+            var _this = this;
+            return table(EmptyAction, function () { return _this.GetRow(); });
+        };
+        Pager.prototype.GetRow = function () {
+            this.Row = tr();
+            return this.Row;
+        };
+        Pager.prototype.GetCells = function () {
+            return [td()];
+        };
+        Pager.prototype.CreateCell = function (current, pageNumber) {
+            var _this = this;
+            return td(function (t) {
+                t.style.cursor = Cursors.pointer;
+                t.textContent = (!current && pageNumber) ? pageNumber.toString() : '...';
+                if (!current) {
+                    t.style.color = Color.Blue;
+                    t.style.textDecoration = TextDecoration.underline;
+                }
+                t.onclick = function (me) {
+                    if (_this.PageChange && pageNumber) {
+                        _this.PageChange({
+                            oldPage: _this.CurrentPage,
+                            newPage: pageNumber
+                        });
+                        _this.CurrentPage = pageNumber;
+                    }
+                };
+            });
+        };
+        Pager.prototype.RePaint = function () {
+            this.DeleteCells();
+            if (this.PageCount <= 10) {
+                this.LessOrEqualTen();
+                return;
+            }
+        };
+        Pager.prototype.LessOrEqualTen = function () {
+            for (var i = 1; i <= 10; i++) {
+                var cell = this.CreateCell(i == this.CurrentPage, i);
+                this.Row.appendChild(cell);
+            }
+        };
+        Pager.prototype.DeleteCells = function () {
+            for (var i = 0; i < this.Row.cells.length; i++) {
+                this.Row.deleteCell(0);
+            }
+        };
+        return Pager;
+    })();
+    Tests.Pager = Pager;
+})(Tests || (Tests = {}));
+$(document).ready(function () {
+    var p = new Tests.Pager(9, 10, function (x) { alert(JSON.stringify(x)); });
+    document.body.appendChild(p.Pager());
+    p.RePaint();
+});
+//# sourceMappingURL=pager.js.map

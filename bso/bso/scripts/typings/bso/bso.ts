@@ -4,13 +4,12 @@
 declare type Creator = () => HTMLElement;
 declare type ElementArray = Array<HTMLElement>;
 declare type ElementCreator = Creator | ElementArray;
-interface HTMLArticleElement extends HTMLElement{ }
+interface HTMLArticleElement extends HTMLElement { }
 interface HTMLHeaderElement extends HTMLElement { }
 interface HTMLFooterElement extends HTMLElement { }
 interface HTMLSectionElement extends HTMLElement { }
 declare type BsoOnChangedType = (name: string, oldValue: any, newValue: any) => void;
-class BsoError extends Error
-{
+class BsoError extends Error {
     public constructor(message?: string) {
         super(message);
     }
@@ -44,7 +43,7 @@ var BsoRe = /\.([\w_]+);/;
 function GetPropertyName(fun: Function): string {
     var str = fun + '';
     var tmp = BsoRe.exec(str);
-    if (tmp && tmp.length >= 2) 
+    if (tmp && tmp.length >= 2)
         return tmp[1];
     return '';
 }
@@ -53,20 +52,16 @@ function GetPropertyName(fun: Function): string {
  * @param {type} ...list
  * @returns
  */
-function CombineCss(...list: string[]): string
-{
+function CombineCss(...list: string[]): string {
     var res: string = "";
-    for (var i = 0; i < list.length - 2; i++)
-    {
+    for (var i = 0; i < list.length - 2; i++) {
         res += list[i] + " ";
     }
     res += list[list.length - 1];
     return res;
 }
-function CombineCssInner(el: HTMLElement, ...list: string[]): void
-{
-    for (var s in list)
-    {
+function CombineCssInner(el: HTMLElement, ...list: string[]): void {
+    for (var s in list) {
         el.classList.add(list[s]);
     }
 }
@@ -76,8 +71,7 @@ abstract class Binder<T>
 {
     private data: T;
     private innerObj = new Object();
-    public get Data(): T
-    {
+    public get Data(): T {
         return this.innerObj as T;
     }
 
@@ -88,28 +82,24 @@ abstract class Binder<T>
      * @param {type} elProp
      * @param {type} objProp
      */
-    public BS<E>(el: E, elProp: (e: E) => any, objProp: (t: T) => any): void
-    {
+    public BS<E>(el: E, elProp: (e: E) => any, objProp: (t: T) => any): void {
         var sEl = GetPropertyName(elProp);
         var sOb = GetPropertyName(objProp);
-        if (this.ExistsProperty(sOb))
-        {
+        if (this.ExistsProperty(sOb)) {
             throw new BsoError('Свойство ' + sOb + 'уже существует');
         }
         Object.defineProperty(this.innerObj, sOb,
             {
-                
-                get: () =>
-                {
+
+                get: () => {
                     return el[sEl];
                 },
-                set: (v: any) =>
-                {
+                set: (v: any) => {
                     el[sEl] = v;
                 },
                 configurable: true,
                 enumerable: true,
-                
+
             });
         this.innerObj[sOb] = this.srcData[sOb]
     }
@@ -119,8 +109,7 @@ abstract class Binder<T>
      * @param {type} fun
      * @param {type} t
      */
-    public BC<E, K>(el: E, objProp: (t: T) => any, Get: (e: E) => K, Set: (v: any) => void): void
-    {
+    public BC<E, K>(el: E, objProp: (t: T) => any, Get: (e: E) => K, Set: (v: any) => void): void {
         var sOb = GetPropertyName(objProp);
         if (this.ExistsProperty(sOb)) {
             throw new BsoError('Свойство ' + sOb + 'уже существует');
@@ -128,8 +117,7 @@ abstract class Binder<T>
         Object.defineProperty(this.innerObj, sOb,
             {
                 get: () => Get(el),
-                set: (v: any) =>
-                {
+                set: (v: any) => {
                     Set(el);
                 },
                 configurable: true,
@@ -140,12 +128,11 @@ abstract class Binder<T>
      * проверяет, есть ли уже в объекте свойство
      * @param {string} propName
      */
-    protected ExistsProperty(propName: string): boolean
-    {
+    protected ExistsProperty(propName: string): boolean {
         return (this.innerObj as Object).hasOwnProperty(propName);
     }
 }
-function article(act?: (t: HTMLArticleElement) => any, ...content: ElementCreator[]): HTMLArticleElement {  
+function article(act?: (t: HTMLArticleElement) => any, ...content: ElementCreator[]): HTMLArticleElement {
     return Tmp<HTMLArticleElement>('article', act, ...content);
 }
 function header(act?: (t: HTMLHeaderElement) => any, ...content: ElementCreator[]): HTMLHeaderElement {
@@ -732,7 +719,7 @@ module Color {
     export const DimGray = "DimGray";
     export const LightSlateGray = "LightSlateGray";
     export const SlateGray = "SlateGray";
-    export const DarkSlateGray = "DarkSlateGray";  
+    export const DarkSlateGray = "DarkSlateGray";
     export const Black = "Black";
 }
 module Display {
@@ -743,7 +730,7 @@ module Display {
     export const list_item = "list-item";
     export const none = "none";
     export const run_in = "run-in";
-    export const table = "";
+    export const table = "table";
     export const table_caption = "table";
     export const table_cell = "table-caption";
     export const table_column = "table-column";
@@ -788,20 +775,55 @@ module WordWrap {
     export const break_word = "break-word";
     export const inherit = "inherit";
 }
-module Overflow
-{
+module Overflow {
     export const auto = "auto";
     export const hidden = "hidden";
     export const scroll = "scroll";
     export const visible = "visible";
     export const inherit = "inherit";
 }
-module TextDecoration
-{
+module TextDecoration {
     export const blink = "blink";
-    export const line_through= "line-through";
+    export const line_through = "line-through";
     export const overline = "overline";
     export const underline = "underline";
     export const none = "none";
     export const inherit = "inherit";
+}
+module Cursors {
+    export const auto = "auto";
+    export const _default = "default";
+    export const none = "none";
+    export const context_menu = "context-menu";
+    export const pointer = "pointer";
+    export const progress = "progress";
+    export const wait = "wait";
+    export const cell = "cell";
+    export const crosshair = "crosshair";
+    export const text = "text";
+    export const vertical_text = "vertical-text";
+    export const alias = "alias";
+    export const copy = "copy";
+    export const move = "move";
+    export const no_drop = "no-drop";
+    export const not_allowed = "not-allowed";
+    export const all_scroll = "all-scrol";
+    export const col_resize = "col-resize";
+    export const row_resize = "row-resize";
+    export const n_resize = "n-resize";
+    export const e_resize = "e-resize";
+    export const s_resize = "s-resize";
+    export const w_resize = "w-resize";
+    export const ne_resize = "ne-resiz";
+    export const nw_resize = "nw-resize";
+    export const se_resize = "se-resize";
+    export const sw_resize = "sw-resize";
+    export const ew_resize = "ew-resize";
+    export const ns_resize = "ns-resize";
+    export const nesw_resize = "nesw-resize";
+    export const nwse_resize = "nwse-resize";
+    export const zoom_in = "zoom-in";
+    export const zoom_out = "zoom-out";
+    export const grab = "grab";
+    export const grabbing = "grabbing";
 }
