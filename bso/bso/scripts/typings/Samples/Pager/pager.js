@@ -2,6 +2,13 @@
 /// <reference path="../../bso/bso.ts" />
 var Tests;
 (function (Tests) {
+    var Distance = (function () {
+        function Distance(ToBegin, ToEnd) {
+            this.ToBegin = ToBegin;
+            this.ToEnd = ToEnd;
+        }
+        return Distance;
+    })();
     var Pager = (function () {
         function Pager(itemCount, pageSize, handl) {
             this.itemCount = itemCount;
@@ -43,6 +50,17 @@ var Tests;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Pager.prototype, "Distance", {
+            /**
+             * где находимся
+             * @returns
+             */
+            get: function () {
+                return new Distance(this.CurrentPage - 1, this.PageCount - this.CurrentPage);
+            },
+            enumerable: true,
+            configurable: true
+        });
         Pager.prototype.Pager = function () {
             return this.CreatePager();
         };
@@ -75,8 +93,8 @@ var Tests;
                             oldPage: _this.CurrentPage,
                             newPage: pageNumber
                         });
-                        _this.CurrentPage = pageNumber;
                     }
+                    _this.CurrentPage = pageNumber;
                 };
             });
         };
@@ -86,11 +104,27 @@ var Tests;
                 this.LessOrEqualTen();
                 return;
             }
+            this.ThanTen();
         };
         Pager.prototype.LessOrEqualTen = function () {
-            for (var i = 1; i <= 10; i++) {
+            for (var i = 1; i <= this.PageCount; i++) {
                 var cell = this.CreateCell(i == this.CurrentPage, i);
                 this.Row.appendChild(cell);
+            }
+        };
+        Pager.prototype.ThanTen = function () {
+            var cells = new Array();
+            var distance = this.Distance;
+            if (distance.ToBegin <= 5) { }
+            else if (distance.ToEnd <= 5) { }
+            else {
+                this.Row.appendChild(this.CreateCell(false, 1));
+                this.Row.appendChild(this.CreateCell(false));
+                for (var i = this.CurrentPage - 5; i < this.CurrentPage + 5; i++) {
+                    this.Row.appendChild(this.CreateCell(i == this.CurrentPage, i));
+                }
+                this.Row.appendChild(this.CreateCell(false));
+                this.Row.appendChild(this.CreateCell(false, this.PageCount));
             }
         };
         Pager.prototype.DeleteCells = function () {

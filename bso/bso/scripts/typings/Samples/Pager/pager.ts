@@ -5,7 +5,11 @@ module Tests {
         oldPage: number;
         newPage: number;
     }
-
+    class Distance
+    {
+        public constructor(public ToBegin: number, public ToEnd: number)
+        { }
+    }
     export class Pager {
         public PageChange: (arg: IPagerPageChangeEventArgs) => void;
         private CurrentPage: number = 1;
@@ -31,8 +35,15 @@ module Tests {
         private get PageCount(): number {
             return this.FullPageCount + this.RowInLastPage > 0 ? 1 : 0;
         }
-        public constructor(private itemCount: number, private pageSize: number, handl?: (arg: IPagerPageChangeEventArgs) => void)
+        /**
+         * где находимся
+         * @returns
+         */
+        private get Distance(): Distance
         {
+            return new Distance(this.CurrentPage - 1, this.PageCount - this.CurrentPage);
+        }
+        public constructor(private itemCount: number, private pageSize: number, handl?: (arg: IPagerPageChangeEventArgs) => void) {
             if (handl)
                 this.PageChange = handl;
         }
@@ -56,8 +67,7 @@ module Tests {
             return td(t=> {
                 t.style.cursor = Cursors.pointer;
                 t.textContent = (!current && pageNumber) ? pageNumber.toString() : '...';
-                if (!current)
-                {
+                if (!current) {
                     t.style.color = Color.Blue;
                     t.style.textDecoration = TextDecoration.underline;
                 }
@@ -68,8 +78,8 @@ module Tests {
                                 oldPage: this.CurrentPage,
                                 newPage: pageNumber
                             });
-                        this.CurrentPage = pageNumber;
                     }
+                    this.CurrentPage = pageNumber;
                 }
 
             });
@@ -80,14 +90,33 @@ module Tests {
                 this.LessOrEqualTen();
                 return;
             }
+            this.ThanTen();
         }
-        private LessOrEqualTen()
-        {
-            for (var i = 1; i <= 10; i++)
-            {
+        private LessOrEqualTen() {
+            for (var i = 1; i <= this.PageCount; i++) {
                 var cell = this.CreateCell(i == this.CurrentPage, i);
                 this.Row.appendChild(cell);
             }
+        }
+        private ThanTen() {
+            var cells = new Array<HTMLTableCellElement>();
+            var distance = this.Distance;
+            if (distance.ToBegin <= 5)//рисуем первые 10
+            { }
+            else if (distance.ToEnd <= 5)//рисуем последние10
+            { }
+            else
+            {
+                this.Row.appendChild(this.CreateCell(false, 1));
+                this.Row.appendChild(this.CreateCell(false));
+                for (var i = this.CurrentPage - 5; i < this.CurrentPage + 5; i++)
+                {
+                    this.Row.appendChild(this.CreateCell(i == this.CurrentPage, i));
+                }
+                this.Row.appendChild(this.CreateCell(false));
+                this.Row.appendChild(this.CreateCell(false, this.PageCount));
+            }
+
         }
         private DeleteCells(): void {
             for (var i = 0; i < this.Row.cells.length; i++) {
@@ -97,8 +126,7 @@ module Tests {
     }
 }
 
-$(document).ready(() =>
-{
+$(document).ready(() => {
     var p = new Tests.Pager(9, 10, x=> { alert(JSON.stringify(x)); });
     document.body.appendChild(p.Pager());
     p.RePaint();
