@@ -16,6 +16,7 @@ var Tests;
             this.CurrentPage = 1;
             if (handl)
                 this.PageChange = handl;
+            //  this.RePaint();
         }
         Object.defineProperty(Pager.prototype, "FullPageCount", {
             /**
@@ -45,7 +46,7 @@ var Tests;
              * @returns
              */
             get: function () {
-                return this.FullPageCount + this.RowInLastPage > 0 ? 1 : 0;
+                return this.FullPageCount + (this.RowInLastPage > 0 ? 1 : 0);
             },
             enumerable: true,
             configurable: true
@@ -78,6 +79,9 @@ var Tests;
         Pager.prototype.GetCells = function () {
             return [td()];
         };
+        Pager.prototype.GetEmptyCell = function () {
+            return td(function (t) { return t.textContent = '...'; });
+        };
         Pager.prototype.CreateCell = function (current, pageNumber) {
             var _this = this;
             return td(function (t) {
@@ -93,6 +97,7 @@ var Tests;
                             oldPage: _this.CurrentPage,
                             newPage: pageNumber
                         });
+                        _this.RePaint();
                     }
                     _this.CurrentPage = pageNumber;
                 };
@@ -115,8 +120,20 @@ var Tests;
         Pager.prototype.ThanTen = function () {
             var cells = new Array();
             var distance = this.Distance;
-            if (distance.ToBegin <= 5) { }
-            else if (distance.ToEnd <= 5) { }
+            if (distance.ToBegin <= 5) {
+                for (var i = 1; i <= 10; i++) {
+                    this.Row.appendChild(this.CreateCell(i == this.CurrentPage, i));
+                }
+                this.Row.appendChild(this.GetEmptyCell());
+                this.Row.appendChild(this.CreateCell(false, this.PageCount));
+            }
+            else if (distance.ToEnd <= 5) {
+                this.Row.appendChild(this.CreateCell(false, 1));
+                this.Row.appendChild(this.GetEmptyCell());
+                for (var i = this.PageCount - 10; i <= this.PageCount; i++) {
+                    this.Row.appendChild(this.CreateCell(i == this.CurrentPage, i));
+                }
+            }
             else {
                 this.Row.appendChild(this.CreateCell(false, 1));
                 this.Row.appendChild(this.CreateCell(false));
@@ -137,7 +154,7 @@ var Tests;
     Tests.Pager = Pager;
 })(Tests || (Tests = {}));
 $(document).ready(function () {
-    var p = new Tests.Pager(9, 10, function (x) { alert(JSON.stringify(x)); });
+    var p = new Tests.Pager(900, 10, function (x) { alert(JSON.stringify(x)); });
     document.body.appendChild(p.Pager());
     p.RePaint();
 });

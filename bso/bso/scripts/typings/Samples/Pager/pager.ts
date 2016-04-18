@@ -33,7 +33,7 @@ module Tests {
          * @returns
          */
         private get PageCount(): number {
-            return this.FullPageCount + this.RowInLastPage > 0 ? 1 : 0;
+            return this.FullPageCount + (this.RowInLastPage > 0 ? 1 : 0);
         }
         /**
          * где находимся
@@ -46,6 +46,7 @@ module Tests {
         public constructor(private itemCount: number, private pageSize: number, handl?: (arg: IPagerPageChangeEventArgs) => void) {
             if (handl)
                 this.PageChange = handl;
+          //  this.RePaint();
         }
         public Pager(): HTMLElement {
             return this.CreatePager();
@@ -63,6 +64,10 @@ module Tests {
         private GetCells(): HTMLTableCellElement[] {
             return [td()];
         }
+        private GetEmptyCell(): HTMLTableCellElement
+        {
+            return td(t=> t.textContent = '...');
+        }
         private CreateCell(current: boolean, pageNumber?: number): HTMLTableCellElement {
             return td(t=> {
                 t.style.cursor = Cursors.pointer;
@@ -78,6 +83,7 @@ module Tests {
                                 oldPage: this.CurrentPage,
                                 newPage: pageNumber
                             });
+                        this.RePaint();
                     }
                     this.CurrentPage = pageNumber;
                 }
@@ -102,9 +108,23 @@ module Tests {
             var cells = new Array<HTMLTableCellElement>();
             var distance = this.Distance;
             if (distance.ToBegin <= 5)//рисуем первые 10
-            { }
+            {
+                for (var i = 1; i <= 10; i++)
+                {
+                    this.Row.appendChild(this.CreateCell(i == this.CurrentPage, i));
+                }
+                this.Row.appendChild(this.GetEmptyCell());
+                this.Row.appendChild(this.CreateCell(false, this.PageCount));
+            }
             else if (distance.ToEnd <= 5)//рисуем последние10
-            { }
+            {
+                this.Row.appendChild(this.CreateCell(false, 1));
+                this.Row.appendChild(this.GetEmptyCell());
+                for (var i = this.PageCount - 10; i <= this.PageCount; i++)
+                {
+                    this.Row.appendChild(this.CreateCell(i == this.CurrentPage, i));
+                }
+            }
             else
             {
                 this.Row.appendChild(this.CreateCell(false, 1));
@@ -119,7 +139,7 @@ module Tests {
 
         }
         private DeleteCells(): void {
-            for (var i = 0; i < this.Row.cells.length; i++) {
+            for (var i = 0; i < this.Row.cells.length; i++) { 
                 this.Row.deleteCell(0);
             }
         }
@@ -127,7 +147,7 @@ module Tests {
 }
 
 $(document).ready(() => {
-    var p = new Tests.Pager(9, 10, x=> { alert(JSON.stringify(x)); });
+    var p = new Tests.Pager(900, 10, x=> { alert(JSON.stringify(x)); });
     document.body.appendChild(p.Pager());
     p.RePaint();
 });
