@@ -16,7 +16,6 @@ var Tests;
             this.CurrentPage = 1;
             if (handl)
                 this.PageChange = handl;
-            //  this.RePaint();
         }
         Object.defineProperty(Pager.prototype, "FullPageCount", {
             /**
@@ -24,7 +23,7 @@ var Tests;
              * @returns
              */
             get: function () {
-                return this.itemCount / this.pageSize;
+                return Math.floor(this.itemCount / this.pageSize);
             },
             enumerable: true,
             configurable: true
@@ -63,7 +62,9 @@ var Tests;
             configurable: true
         });
         Pager.prototype.Pager = function () {
-            return this.CreatePager();
+            var res = this.CreatePager();
+            this.RePaint();
+            return res;
         };
         Pager.prototype.CreatePager = function () {
             return this.GetTab();
@@ -118,7 +119,6 @@ var Tests;
             }
         };
         Pager.prototype.ThanTen = function () {
-            var cells = new Array();
             var distance = this.Distance;
             if (distance.ToBegin <= 5) {
                 for (var i = 1; i <= 10; i++) {
@@ -155,8 +155,7 @@ var Tests;
     Tests.Pager = Pager;
 })(Tests || (Tests = {}));
 $(document).ready(function () {
-    var p = new Tests.Pager(900, 10, function (x) { alert(JSON.stringify(x)); });
+    var p = new Tests.Pager(253, 10, function (x) { alert(JSON.stringify(x)); });
     document.body.appendChild(p.Pager());
-    p.RePaint();
 });
 //# sourceMappingURL=pager.js.map

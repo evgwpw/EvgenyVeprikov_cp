@@ -19,7 +19,7 @@ module Tests {
          * @returns
          */
         private get FullPageCount(): number {
-            return this.itemCount / this.pageSize;
+            return Math.floor(this.itemCount / this.pageSize);
         }
         /**
          * строк на последней странице
@@ -46,10 +46,11 @@ module Tests {
         public constructor(private itemCount: number, private pageSize: number, handl?: (arg: IPagerPageChangeEventArgs) => void) {
             if (handl)
                 this.PageChange = handl;
-          //  this.RePaint();
         }
         public Pager(): HTMLElement {
-            return this.CreatePager();
+            var res = this.CreatePager();
+            this.RePaint();
+            return res;
         }
         private CreatePager(): HTMLElement {
             return this.GetTab();
@@ -106,7 +107,6 @@ module Tests {
             }
         }
         private ThanTen() {
-            var cells = new Array<HTMLTableCellElement>();
             var distance = this.Distance;
             if (distance.ToBegin <= 5)//рисуем первые 10
             {
@@ -149,7 +149,6 @@ module Tests {
 }
 
 $(document).ready(() => {
-    var p = new Tests.Pager(900, 10, x=> { alert(JSON.stringify(x)); });
+    var p = new Tests.Pager(253, 10, x=> { alert(JSON.stringify(x)); });
     document.body.appendChild(p.Pager());
-    p.RePaint();
 });
