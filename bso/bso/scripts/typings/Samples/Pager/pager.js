@@ -86,7 +86,7 @@ var Tests;
             var _this = this;
             return td(function (t) {
                 t.style.cursor = Cursors.pointer;
-                t.textContent = (!current && pageNumber) ? pageNumber.toString() : '...';
+                t.textContent = pageNumber ? pageNumber.toString() : '...';
                 if (!current) {
                     t.style.color = Color.Blue;
                     t.style.textDecoration = TextDecoration.underline;
@@ -97,9 +97,9 @@ var Tests;
                             oldPage: _this.CurrentPage,
                             newPage: pageNumber
                         });
+                        _this.CurrentPage = pageNumber;
                         _this.RePaint();
                     }
-                    _this.CurrentPage = pageNumber;
                 };
             });
         };
@@ -145,7 +145,8 @@ var Tests;
             }
         };
         Pager.prototype.DeleteCells = function () {
-            for (var i = 0; i < this.Row.cells.length; i++) {
+            var len = this.Row.cells.length;
+            for (var i = 0; i < len; i++) {
                 this.Row.deleteCell(0);
             }
         };

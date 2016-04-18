@@ -71,7 +71,7 @@ module Tests {
         private CreateCell(current: boolean, pageNumber?: number): HTMLTableCellElement {
             return td(t=> {
                 t.style.cursor = Cursors.pointer;
-                t.textContent = (!current && pageNumber) ? pageNumber.toString() : '...';
+                t.textContent = pageNumber ? pageNumber.toString() : '...';
                 if (!current) {
                     t.style.color = Color.Blue;
                     t.style.textDecoration = TextDecoration.underline;
@@ -83,9 +83,10 @@ module Tests {
                                 oldPage: this.CurrentPage,
                                 newPage: pageNumber
                             });
+                        this.CurrentPage = pageNumber;
                         this.RePaint();
                     }
-                    this.CurrentPage = pageNumber;
+                    
                 }
 
             });
@@ -139,7 +140,8 @@ module Tests {
 
         }
         private DeleteCells(): void {
-            for (var i = 0; i < this.Row.cells.length; i++) { 
+            var len = this.Row.cells.length;
+            for (var i = 0; i < len; i++) { 
                 this.Row.deleteCell(0);
             }
         }
