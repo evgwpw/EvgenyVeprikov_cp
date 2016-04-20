@@ -74,11 +74,7 @@ var Tests;
             return table(EmptyAction, function () { return _this.GetRow(); });
         };
         Pager.prototype.GetRow = function () {
-            this.Row = tr();
-            return this.Row;
-        };
-        Pager.prototype.GetCells = function () {
-            return [td()];
+            return this.Row = tr();
         };
         Pager.prototype.GetEmptyCell = function () {
             return td(function (t) { return t.textContent = '...'; });

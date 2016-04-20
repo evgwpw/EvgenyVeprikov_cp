@@ -5,10 +5,8 @@ module Tests {
         oldPage: number;
         newPage: number;
     }
-    class Distance
-    {
-        public constructor(public ToBegin: number, public ToEnd: number)
-        { }
+    class Distance {
+        public constructor(public ToBegin: number, public ToEnd: number) { }
     }
     export class Pager {
         public PageChange: (arg: IPagerPageChangeEventArgs) => void;
@@ -39,8 +37,7 @@ module Tests {
          * где находимся
          * @returns
          */
-        private get Distance(): Distance
-        {
+        private get Distance(): Distance {
             return new Distance(this.CurrentPage - 1, this.PageCount - this.CurrentPage);
         }
         public constructor(private itemCount: number, private pageSize: number, handl?: (arg: IPagerPageChangeEventArgs) => void) {
@@ -59,14 +56,9 @@ module Tests {
             return table(EmptyAction, () => this.GetRow());
         }
         private GetRow(): HTMLTableRowElement {
-            this.Row = tr();
-            return this.Row;
+            return this.Row = tr();
         }
-        private GetCells(): HTMLTableCellElement[] {
-            return [td()];
-        }
-        private GetEmptyCell(): HTMLTableCellElement
-        {
+        private GetEmptyCell(): HTMLTableCellElement {
             return td(t=> t.textContent = '...');
         }
         private CreateCell(current: boolean, pageNumber?: number): HTMLTableCellElement {
@@ -79,17 +71,14 @@ module Tests {
                 }
                 t.onclick = me=> {
                     if (this.PageChange && pageNumber) {
-                        this.PageChange(
-                            {
-                                oldPage: this.CurrentPage,
-                                newPage: pageNumber
-                            });
+                        this.PageChange({
+                            oldPage: this.CurrentPage,
+                            newPage: pageNumber
+                        });
                         this.CurrentPage = pageNumber;
                         this.RePaint();
                     }
-                    
                 }
-
             });
         }
         public RePaint(): void {
@@ -110,8 +99,7 @@ module Tests {
             var distance = this.Distance;
             if (distance.ToBegin <= 5)//рисуем первые 10
             {
-                for (var i = 1; i <= 10; i++)
-                {
+                for (var i = 1; i <= 10; i++) {
                     this.Row.appendChild(this.CreateCell(i == this.CurrentPage, i));
                 }
                 this.Row.appendChild(this.GetEmptyCell());
@@ -121,17 +109,14 @@ module Tests {
             {
                 this.Row.appendChild(this.CreateCell(false, 1));
                 this.Row.appendChild(this.GetEmptyCell());
-                for (var i = this.PageCount - 10; i <= this.PageCount; i++)
-                {
+                for (var i = this.PageCount - 10; i <= this.PageCount; i++) {
                     this.Row.appendChild(this.CreateCell(i == this.CurrentPage, i));
                 }
             }
-            else
-            {
+            else {
                 this.Row.appendChild(this.CreateCell(false, 1));
                 this.Row.appendChild(this.CreateCell(false));
-                for (var i = this.CurrentPage - 5; i < this.CurrentPage + 5; i++)
-                {
+                for (var i = this.CurrentPage - 5; i < this.CurrentPage + 5; i++) {
                     this.Row.appendChild(this.CreateCell(i == this.CurrentPage, i));
                 }
                 this.Row.appendChild(this.CreateCell(false));
@@ -141,7 +126,7 @@ module Tests {
         }
         private DeleteCells(): void {
             var len = this.Row.cells.length;
-            for (var i = 0; i < len; i++) { 
+            for (var i = 0; i < len; i++) {
                 this.Row.deleteCell(0);
             }
         }
