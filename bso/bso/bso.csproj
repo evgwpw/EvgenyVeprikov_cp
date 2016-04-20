@@ -128,6 +128,7 @@
     <Content Include="scripts\typings\bso\bso.js.map" />
     <Content Include="scripts\typings\Samples\Binding1\binding1.js" />
     <Content Include="scripts\typings\Samples\Pager\pager.js" />
+    <Content Include="scripts\typings\Samples\SecondsElapsed\SecondsElapsed.js" />
     <Content Include="scripts\typings\todo\todo.js.map" />
     <Content Include="scripts\typings\bso\bootstrapCss.js.map" />
     <Content Include="scripts\typings\Samples\Binding1\binding1.js.map" />
@@ -219,6 +220,7 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="scripts\typings\Samples\Pager\pager.js.map" />
+    <Content Include="scripts\typings\Samples\SecondsElapsed\SecondsElapsed.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -245,6 +247,7 @@
     <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="scripts\typings\Samples\Binding1\binding1.ts" />
     <TypeScriptCompile Include="scripts\typings\Samples\Pager\pager.ts" />
+    <TypeScriptCompile Include="scripts\typings\Samples\SecondsElapsed\SecondsElapsed.ts" />
     <TypeScriptCompile Include="scripts\typings\todo\todo.ts" />
   </ItemGroup>
   <ItemGroup>
