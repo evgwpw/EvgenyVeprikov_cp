@@ -57,4 +57,15 @@ var binding1 = div(function (t) { t.style.width = '200px'; }, function () { retu
 $(document).ready(function () {
     $('body')[0].appendChild(binding1);
 });
+var Test = (function () {
+    function Test() {
+        var _this = this;
+        this.test = div(function (t) {
+            _this.prn = t;
+        }, function () { return div(EmptyAction, function () { return div(EmptyAction, function () { return div(function (x) {
+            _this.prn;
+        }); }); }); });
+    }
+    return Test;
+})();
 //# sourceMappingURL=binding1.js.map

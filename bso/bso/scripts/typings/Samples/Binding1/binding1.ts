@@ -47,7 +47,7 @@ var binding1 = div(t=> { t.style.width = '200px'; },
                     minView: 2,
                     showClear: true,
                     showClose: true,
-                    pickTime: false 
+                    pickTime: false
                 })
                 .data('datetimepicker');
 
@@ -66,8 +66,20 @@ var binding1 = div(t=> { t.style.width = '200px'; },
                 var str = JSON.stringify(obj);
                 alert(str);
             };
-        }))); 
+        })));
 
 $(document).ready(() => {
     $('body')[0].appendChild(binding1);
 });
+class Test {
+    prn: HTMLDivElement;
+    test = div(t=> {
+        this.prn = t;
+    },
+        () => div(EmptyAction,
+            () => div(EmptyAction,
+                () => div(x=> {
+                    this.prn
+                }))));
+
+}
