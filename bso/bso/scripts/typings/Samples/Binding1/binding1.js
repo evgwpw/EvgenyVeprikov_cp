@@ -16,11 +16,12 @@ var data = {
 var Binder1 = (function (_super) {
     __extends(Binder1, _super);
     function Binder1(srcData) {
-        _super.call(this, srcData);
-        this.srcData = srcData;
+        var _this = _super.call(this, srcData) || this;
+        _this.srcData = srcData;
+        return _this;
     }
     return Binder1;
-})(Binder);
+}(Binder));
 var binder = new Binder1(data);
 var binding1 = div(function (t) { t.style.width = '200px'; }, function () { return inputText(function (t) {
     binder.BS(t, function (x) { return x.value; }, function (x) { return x.FirstName; });
@@ -67,5 +68,5 @@ var Test = (function () {
         }); }); }); });
     }
     return Test;
-})();
+}());
 //# sourceMappingURL=binding1.js.map

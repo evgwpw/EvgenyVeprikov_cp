@@ -12,7 +12,7 @@ var Test1 = (function () {
         }); });
     };
     return Test1;
-})();
+}());
 window.onload = function (ev) {
     var e = new Test1().Element();
     document.body.appendChild(e);

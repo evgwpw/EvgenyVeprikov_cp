@@ -8,10 +8,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 var BsoError = (function (_super) {
     __extends(BsoError, _super);
     function BsoError(message) {
-        _super.call(this, message);
+        return _super.call(this, message) || this;
     }
     return BsoError;
-})(Error);
+}(Error));
 function Tmp(tag, act) {
     var content = [];
     for (var _i = 2; _i < arguments.length; _i++) {
@@ -56,7 +56,7 @@ function GetPropertyName(fun) {
 function CombineCss() {
     var list = [];
     for (var _i = 0; _i < arguments.length; _i++) {
-        list[_i - 0] = arguments[_i];
+        list[_i] = arguments[_i];
     }
     var res = "";
     for (var i = 0; i < list.length - 2; i++) {
@@ -138,7 +138,7 @@ var Binder = (function () {
         return this.innerObj.hasOwnProperty(propName);
     };
     return Binder;
-})();
+}());
 function article(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -230,216 +230,96 @@ function basefont(act) {
     }
     return Tmp.apply(void 0, ['basefont', act].concat(content));
 }
-function address(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['address', act].concat(content));
-}
-function blockquote(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['blockquote', act].concat(content));
-}
-function center(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['center', act].concat(content));
-}
-function keygen(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['keygen', act].concat(content));
-}
-function listing(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['listing', act].concat(content));
-}
-function plaintext(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['plaintext', act].concat(content));
-}
-function xmp(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['xmp', act].concat(content));
-}
-function abbr(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['abbr', act].concat(content));
-}
-function acronym(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['acronym', act].concat(content));
-}
-function b(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['b', act].concat(content));
-}
-function bdo(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['bdo', act].concat(content));
-}
-function big(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['big', act].concat(content));
-}
-function cite(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['cite', act].concat(content));
-}
-function code(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['code', act].concat(content));
-}
-function dfn(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['dfn', act].concat(content));
-}
-function em(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['em', act].concat(content));
-}
-function i(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['i', act].concat(content));
-}
-function kbd(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['kbd', act].concat(content));
-}
-function nobr(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['nobr', act].concat(content));
-}
-function rt(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['rt', act].concat(content));
-}
-function ruby(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['ruby', act].concat(content));
-}
-function s(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['s', act].concat(content));
-}
-function samp(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['samp', act].concat(content));
-}
-function small(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['small', act].concat(content));
-}
-function strike(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['strike', act].concat(content));
-}
-function strong(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['strong', act].concat(content));
-}
-function sub(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['sub', act].concat(content));
-}
-function sup(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['sup', act].concat(content));
-}
-function tt(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['tt', act].concat(content));
-}
-function u(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['u', act].concat(content));
-}
+//function address(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
+//    return Tmp<HTMLBlockElement>('address', act, ...content);
+//}
+//function blockquote(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
+//    return Tmp<HTMLBlockElement>('blockquote', act, ...content);
+//}
+//function center(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
+//    return Tmp<HTMLBlockElement>('center', act, ...content);
+//}
+//function keygen(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
+//    return Tmp<HTMLBlockElement>('keygen', act, ...content);
+//}
+//function listing(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
+//    return Tmp<HTMLBlockElement>('listing', act, ...content);
+//}
+//function plaintext(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
+//    return Tmp<HTMLBlockElement>('plaintext', act, ...content);
+//}
+//function xmp(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
+//    return Tmp<HTMLBlockElement>('xmp', act, ...content);
+//}
+//function abbr(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('abbr', act, ...content);
+//}
+//function acronym(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('acronym', act, ...content);
+//}
+//function b(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('b', act, ...content);
+//}
+//function bdo(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('bdo', act, ...content);
+//}
+//function big(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('big', act, ...content);
+//}
+//function cite(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('cite', act, ...content);
+//}
+//function code(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('code', act, ...content);
+//}
+//function dfn(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('dfn', act, ...content);
+//}
+//function em(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('em', act, ...content);
+//}
+//function i(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('i', act, ...content);
+//}
+//function kbd(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('kbd', act, ...content);
+//}
+//function nobr(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('nobr', act, ...content);
+//}
+//function rt(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('rt', act, ...content);
+//}
+//function ruby(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('ruby', act, ...content);
+//}
+//function s(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('s', act, ...content);
+//}
+//function samp(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('samp', act, ...content);
+//}
+//function small(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('small', act, ...content);
+//}
+//function strike(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('strike', act, ...content);
+//}
+//function strong(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('strong', act, ...content);
+//}
+//function sub(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('sub', act, ...content);
+//}
+//function sup(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('sup', act, ...content);
+//}
+//function tt(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('tt', act, ...content);
+//}
+//function u(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('u', act, ...content);
+//}
 function body(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -482,13 +362,9 @@ function datalist(act) {
     }
     return Tmp.apply(void 0, ['datalist', act].concat(content));
 }
-function dd(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['dd', act].concat(content));
-}
+//function dd(act?: (t: HTMLDDElement) => any, ...content: ElementCreator[]): HTMLDDElement {
+//    return Tmp<HTMLDDElement>('dd', act, ...content);
+//}
 function del(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -517,13 +393,9 @@ function dl(act) {
     }
     return Tmp.apply(void 0, ['dl', act].concat(content));
 }
-function dt(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['dt', act].concat(content));
-}
+//function dt(act?: (t: HTMLDTElement) => any, ...content: ElementCreator[]): HTMLDTElement {
+//    return Tmp<HTMLDTElement>('dt', act, ...content);
+//}
 function embed(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -850,13 +722,9 @@ function inputWeek(act) {
     res.type = 'week';
     return res;
 }
-function isindex(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['isindex', act].concat(content));
-}
+//function isindex(act?: (t: HTMLIsIndexElement) => any, ...content: ElementCreator[]): HTMLIsIndexElement {
+//    return Tmp<HTMLIsIndexElement>('isindex', act, ...content);
+//}
 function label(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -913,13 +781,9 @@ function meta(act) {
     }
     return Tmp.apply(void 0, ['meta', act].concat(content));
 }
-function nextid(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['nextid', act].concat(content));
-}
+//function nextid(act?: (t: HTMLNextIdElement) => any, ...content: ElementCreator[]): HTMLNextIdElement {
+//    return Tmp<HTMLNextIdElement>('nextid', act, ...content);
+//}
 function object(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -1107,13 +971,9 @@ function xMsWebview(act) {
  * @param act
  * @param content
  */
-function Var(act) {
-    var content = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        content[_i - 1] = arguments[_i];
-    }
-    return Tmp.apply(void 0, ['var', act].concat(content));
-}
+//function Var(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
+//    return Tmp<HTMLPhraseElement>('var', act, ...content);
+//}
 //}
 var Color;
 (function (Color) {

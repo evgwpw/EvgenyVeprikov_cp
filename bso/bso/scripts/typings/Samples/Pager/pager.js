@@ -8,7 +8,7 @@ var Tests;
             this.ToEnd = ToEnd;
         }
         return Distance;
-    })();
+    }());
     var Pager = (function () {
         function Pager(itemCount, pageSize, handl) {
             this.itemCount = itemCount;
@@ -147,7 +147,7 @@ var Tests;
             }
         };
         return Pager;
-    })();
+    }());
     Tests.Pager = Pager;
 })(Tests || (Tests = {}));
 $(document).ready(function () {
