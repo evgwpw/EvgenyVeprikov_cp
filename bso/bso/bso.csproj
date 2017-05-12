@@ -253,6 +253,7 @@
     <TypeScriptCompile Include="scripts\typings\Samples\Pager\pager.ts" />
     <TypeScriptCompile Include="scripts\typings\Samples\SecondsElapsed\SecondsElapsed.ts" />
     <TypeScriptCompile Include="scripts\typings\Samples\Tests\Test1.ts" />
+    <TypeScriptCompile Include="scripts\typings\Samples\_1791\_1791.ts" />
     <TypeScriptCompile Include="scripts\typings\todo\todo.ts" />
   </ItemGroup>
   <ItemGroup>

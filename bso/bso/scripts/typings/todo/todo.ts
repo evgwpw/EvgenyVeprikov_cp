@@ -70,6 +70,7 @@ function GetItem(str: string): HTMLLIElement
 
     return res;
 }
+
 $(document).ready(()=>
 {
     $('body')[0].appendChild(todoapp);
