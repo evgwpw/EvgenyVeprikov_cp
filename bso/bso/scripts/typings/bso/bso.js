@@ -1,10 +1,15 @@
 /// <reference path="../jquery/jquery.d.ts" />
 //module BSO {
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var BsoError = (function (_super) {
     __extends(BsoError, _super);
     function BsoError(message) {
@@ -230,96 +235,6 @@ function basefont(act) {
     }
     return Tmp.apply(void 0, ['basefont', act].concat(content));
 }
-//function address(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
-//    return Tmp<HTMLBlockElement>('address', act, ...content);
-//}
-//function blockquote(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
-//    return Tmp<HTMLBlockElement>('blockquote', act, ...content);
-//}
-//function center(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
-//    return Tmp<HTMLBlockElement>('center', act, ...content);
-//}
-//function keygen(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
-//    return Tmp<HTMLBlockElement>('keygen', act, ...content);
-//}
-//function listing(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
-//    return Tmp<HTMLBlockElement>('listing', act, ...content);
-//}
-//function plaintext(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
-//    return Tmp<HTMLBlockElement>('plaintext', act, ...content);
-//}
-//function xmp(act?: (t: HTMLBlockElement) => any, ...content: ElementCreator[]): HTMLBlockElement {
-//    return Tmp<HTMLBlockElement>('xmp', act, ...content);
-//}
-//function abbr(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('abbr', act, ...content);
-//}
-//function acronym(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('acronym', act, ...content);
-//}
-//function b(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('b', act, ...content);
-//}
-//function bdo(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('bdo', act, ...content);
-//}
-//function big(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('big', act, ...content);
-//}
-//function cite(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('cite', act, ...content);
-//}
-//function code(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('code', act, ...content);
-//}
-//function dfn(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('dfn', act, ...content);
-//}
-//function em(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('em', act, ...content);
-//}
-//function i(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('i', act, ...content);
-//}
-//function kbd(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('kbd', act, ...content);
-//}
-//function nobr(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('nobr', act, ...content);
-//}
-//function rt(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('rt', act, ...content);
-//}
-//function ruby(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('ruby', act, ...content);
-//}
-//function s(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('s', act, ...content);
-//}
-//function samp(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('samp', act, ...content);
-//}
-//function small(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('small', act, ...content);
-//}
-//function strike(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('strike', act, ...content);
-//}
-//function strong(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('strong', act, ...content);
-//}
-//function sub(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('sub', act, ...content);
-//}
-//function sup(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('sup', act, ...content);
-//}
-//function tt(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('tt', act, ...content);
-//}
-//function u(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('u', act, ...content);
-//}
 function body(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -362,9 +277,6 @@ function datalist(act) {
     }
     return Tmp.apply(void 0, ['datalist', act].concat(content));
 }
-//function dd(act?: (t: HTMLDDElement) => any, ...content: ElementCreator[]): HTMLDDElement {
-//    return Tmp<HTMLDDElement>('dd', act, ...content);
-//}
 function del(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -393,9 +305,6 @@ function dl(act) {
     }
     return Tmp.apply(void 0, ['dl', act].concat(content));
 }
-//function dt(act?: (t: HTMLDTElement) => any, ...content: ElementCreator[]): HTMLDTElement {
-//    return Tmp<HTMLDTElement>('dt', act, ...content);
-//}
 function embed(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -722,9 +631,6 @@ function inputWeek(act) {
     res.type = 'week';
     return res;
 }
-//function isindex(act?: (t: HTMLIsIndexElement) => any, ...content: ElementCreator[]): HTMLIsIndexElement {
-//    return Tmp<HTMLIsIndexElement>('isindex', act, ...content);
-//}
 function label(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -781,9 +687,6 @@ function meta(act) {
     }
     return Tmp.apply(void 0, ['meta', act].concat(content));
 }
-//function nextid(act?: (t: HTMLNextIdElement) => any, ...content: ElementCreator[]): HTMLNextIdElement {
-//    return Tmp<HTMLNextIdElement>('nextid', act, ...content);
-//}
 function object(act) {
     var content = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -966,15 +869,6 @@ function xMsWebview(act) {
     }
     return Tmp.apply(void 0, ['x-ms-webview', act].concat(content));
 }
-/**
- * конфликт с ключевым словом var
- * @param act
- * @param content
- */
-//function Var(act?: (t: HTMLPhraseElement) => any, ...content: ElementCreator[]): HTMLPhraseElement {
-//    return Tmp<HTMLPhraseElement>('var', act, ...content);
-//}
-//}
 var Color;
 (function (Color) {
     Color.IndianRed = "IndianRed";

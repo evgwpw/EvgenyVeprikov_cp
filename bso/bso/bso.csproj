@@ -29,7 +29,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.2</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -239,7 +239,9 @@
     <Content Include="scripts\jquery-2.2.1.min.js" />
     <Content Include="scripts\typings\bso\bso.js" />
     <Content Include="scripts\typings\todo\todo.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -248,6 +250,7 @@
     <TypeScriptCompile Include="scripts\typings\bootstrap.datepicker\bootstrap.datepicker.d.ts" />
     <TypeScriptCompile Include="scripts\typings\bso\bootstrapCss.ts" />
     <TypeScriptCompile Include="scripts\typings\bso\bso.ts" />
+    <TypeScriptCompile Include="scripts\typings\bso\old_bso.ts" />
     <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="scripts\typings\Samples\Binding1\binding1.ts" />
     <TypeScriptCompile Include="scripts\typings\Samples\Pager\pager.ts" />
