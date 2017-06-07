@@ -1,6 +1,4 @@
-﻿/// <reference path="../../bso/bootstrapcss.ts" />
-/// <reference path="../../bso/bootstrapcss.ts" />
-/// <reference path="../../bso/bso.ts" />
+﻿/// <reference path="../../bso/bso.ts" />
 /// <reference path="../../bso/bootstrapcss.ts" />
 /// <reference path="../../bootstrap.datepicker/bootstrap.datepicker.d.ts" />
 interface IBinding1Data {

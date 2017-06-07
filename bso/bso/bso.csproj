@@ -128,10 +128,12 @@
     <Content Include="scripts\moment.min.js" />
     <Content Include="scripts\typings\bso\bootstrapCss.js" />
     <Content Include="scripts\typings\bso\bso.js.map" />
+    <Content Include="scripts\typings\bso\old_bso.js" />
     <Content Include="scripts\typings\Samples\Binding1\binding1.js" />
     <Content Include="scripts\typings\Samples\Pager\pager.js" />
     <Content Include="scripts\typings\Samples\SecondsElapsed\SecondsElapsed.js" />
     <Content Include="scripts\typings\Samples\Tests\Test1.js" />
+    <Content Include="scripts\typings\Samples\_1791\_1791.js" />
     <Content Include="scripts\typings\todo\todo.js.map" />
     <Content Include="scripts\typings\bso\bootstrapCss.js.map" />
     <Content Include="scripts\typings\Samples\Binding1\binding1.js.map" />
@@ -225,6 +227,8 @@
     <Content Include="scripts\typings\Samples\Pager\pager.js.map" />
     <Content Include="scripts\typings\Samples\SecondsElapsed\SecondsElapsed.js.map" />
     <Content Include="scripts\typings\Samples\Tests\Test1.js.map" />
+    <Content Include="scripts\typings\bso\old_bso.js.map" />
+    <Content Include="scripts\typings\Samples\_1791\_1791.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
