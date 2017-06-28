@@ -111,6 +111,7 @@
     <Content Include="html\Samples\Binding1\binding1.html" />
     <Content Include="html\Samples\Pager\Pager.html" />
     <Content Include="html\Samples\Tests\Test1.html" />
+    <Content Include="html\Samples\Tests\Test2.html" />
     <Content Include="html\todo.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -134,6 +135,7 @@
     <Content Include="scripts\typings\Samples\Pager\pager.js" />
     <Content Include="scripts\typings\Samples\SecondsElapsed\SecondsElapsed.js" />
     <Content Include="scripts\typings\Samples\Tests\Test1.js" />
+    <Content Include="scripts\typings\Samples\Tests\Test2.js" />
     <Content Include="scripts\typings\Samples\_1791\_1791.js" />
     <Content Include="scripts\typings\todo\todo.js.map" />
     <Content Include="scripts\typings\bso\bootstrapCss.js.map" />
@@ -231,6 +233,7 @@
     <Content Include="scripts\typings\bso\old_bso.js.map" />
     <Content Include="scripts\typings\Samples\_1791\_1791.js.map" />
     <Content Include="scripts\typings\Controls\Bases.js.map" />
+    <Content Include="scripts\typings\Samples\Tests\Test2.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -263,6 +266,7 @@
     <TypeScriptCompile Include="scripts\typings\Samples\Pager\pager.ts" />
     <TypeScriptCompile Include="scripts\typings\Samples\SecondsElapsed\SecondsElapsed.ts" />
     <TypeScriptCompile Include="scripts\typings\Samples\Tests\Test1.ts" />
+    <TypeScriptCompile Include="scripts\typings\Samples\Tests\Test2.ts" />
     <TypeScriptCompile Include="scripts\typings\Samples\_1791\_1791.ts" />
     <TypeScriptCompile Include="scripts\typings\todo\todo.ts" />
   </ItemGroup>
