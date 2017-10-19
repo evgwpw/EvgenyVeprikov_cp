@@ -30,6 +30,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -128,9 +129,8 @@
     <Content Include="scripts\moment.js" />
     <Content Include="scripts\moment.min.js" />
     <Content Include="scripts\typings\bso\bootstrapCss.js" />
+    <Content Include="scripts\typings\bso\bso.js" />
     <Content Include="scripts\typings\bso\bso.js.map" />
-    <Content Include="scripts\typings\bso\old_bso.js" />
-    <Content Include="scripts\typings\Controls\Bases.js" />
     <Content Include="scripts\typings\Samples\Binding1\binding1.js" />
     <Content Include="scripts\typings\Samples\Pager\pager.js" />
     <Content Include="scripts\typings\Samples\SecondsElapsed\SecondsElapsed.js" />
@@ -230,10 +230,6 @@
     <Content Include="scripts\typings\Samples\Pager\pager.js.map" />
     <Content Include="scripts\typings\Samples\SecondsElapsed\SecondsElapsed.js.map" />
     <Content Include="scripts\typings\Samples\Tests\Test1.js.map" />
-    <Content Include="scripts\typings\bso\old_bso.js.map" />
-    <Content Include="scripts\typings\Samples\_1791\_1791.js.map" />
-    <Content Include="scripts\typings\Controls\Bases.js.map" />
-    <Content Include="scripts\typings\Samples\Tests\Test2.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -246,7 +242,6 @@
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\jquery-2.2.1.js" />
     <Content Include="scripts\jquery-2.2.1.min.js" />
-    <Content Include="scripts\typings\bso\bso.js" />
     <Content Include="scripts\typings\todo\todo.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
