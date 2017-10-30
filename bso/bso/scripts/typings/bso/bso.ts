@@ -16,6 +16,7 @@
         }
     }
 
+
     function Tmp<T extends HTMLElement>(tag: string, act?: (t: T) => any | T, ...content: ElementCreator[]): T {
         var el = document.createElement(tag) as T;
         if (act)
